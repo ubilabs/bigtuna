@@ -20,14 +20,16 @@ class HooksController < ApplicationController
 
     project = Project.where(["(vcs_source = ? or vcs_source = ?) AND (vcs_branch = ?)",
                               public_source, private_source, branch]).first
-
-    if BigTuna.github_secure.nil?
-      render :text => "github secure token is not set up", :status => 403
-    elsif project and params[:secure] == BigTuna.github_secure
-      trigger_and_respond(project)
-    else
-      render :text => "invalid secure token", :status => 404
-    end
+# We don't want to use a security token because we use a firewall instead.
+# c.f. `config/routes.rb`
+#    if BigTuna.github_secure.nil?
+#      render :text => "github secure token is not set up", :status => 403
+#    elsif project and params[:secure] == BigTuna.github_secure
+#      trigger_and_respond(project)
+#    else
+#      render :text => "invalid secure token", :status => 404
+#    end
+    trigger_and_respond(project) if project
   end
 
   def bitbucket

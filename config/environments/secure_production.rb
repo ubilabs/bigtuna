@@ -33,18 +33,18 @@ BigTuna::Application.configure do
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
-  config.action_mailer.delivery_method = :smtp
-  if File.exists?(File.join(Rails.root, 'config', 'email.yml'))
-    config.action_mailer.smtp_settings = YAML.load_file("config/email.yml")[Rails.env]
-  else
-    warn "WARNING: config/email.yml does not exist. Email notifications will not work."
-  end
-
-  if BigTuna.config[:url_host]
-    config.action_mailer.default_url_options = { :host => BigTuna.config[:url_host] }
-  else
-    warn "WARNING: No url_host set in config/bigtuna.yml. Notification links will not work."
-  end
+#  config.action_mailer.delivery_method = :smtp
+#  if File.exists?(File.join(Rails.root, 'config', 'email.yml'))
+#    config.action_mailer.smtp_settings = YAML.load_file("config/email.yml")[Rails.env]
+#  else
+#    warn "WARNING: config/email.yml does not exist. Email notifications will not work."
+#  end
+#
+#  if BigTuna.config[:url_host]
+#    config.action_mailer.default_url_options = { :host => BigTuna.config[:url_host] }
+#  else
+#    warn "WARNING: No url_host set in config/bigtuna.yml. Notification links will not work."
+#  end
 
 
   # Disable delivery errors, bad email addresses will be ignored
@@ -60,6 +60,6 @@ BigTuna::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.logger = Logger.new "/usr/local/var/log/bigtuna/production.log"
+  config.logger = Logger.new "/usr/local/var/log/bigtuna/secure_production.log"
 
 end
